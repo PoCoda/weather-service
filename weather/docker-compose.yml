@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  weather-service:
+    image: 'weather-service:latest'
+    build:
+      context: .
+    container_name: weather-service
+    depends_on:
+      - weather-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://weather-db:5432/weather-db
+      - SPRING_DATASOURCE_USERNAME=weather-db-user
+      - SPRING_DATASOURCE_PASSWORD=weather-db-password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - 8887:8080
+
+  weather-db:
+    image: postgres
+    container_name: weather-db
+    environment:
+      - POSTGRES_DB=weather-db
+      - POSTGRES_USER=weather-db-user
+      - POSTGRES_PASSWORD=weather-db-password
+    ports:
+      - 5557:5432
