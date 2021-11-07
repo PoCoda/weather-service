@@ -13,7 +13,9 @@ services:
       - SPRING_DATASOURCE_USERNAME=weather-db-user
       - SPRING_DATASOURCE_PASSWORD=weather-db-password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5007
+      - WEATHER_API_KEY=fd69b05eb60d4d78a7d104128210711
+      - WEATHER_API_URL=http://api.weatherapi.com/v1
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     ports:
       - 5007:5005
       - 8887:8080
