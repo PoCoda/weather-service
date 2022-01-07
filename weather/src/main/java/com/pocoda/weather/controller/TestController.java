@@ -5,6 +5,7 @@ import com.pocoda.weather.database.repository.TestRepository;
 import com.pocoda.weather.model.request.TestRequest;
 import com.pocoda.weather.model.response.TestListResponse;
 import com.pocoda.weather.model.response.TestResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 public class TestController {
     @Autowired
@@ -32,5 +34,15 @@ public class TestController {
     public ResponseEntity createTest(@RequestBody TestRequest request){
         Test result = repository.save(Test.builder().key(request.getKey()).value(request.getValue()).build());
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/log")
+    public String log(){
+        log.error("error");
+        log.warn("warn");
+        log.info("info");
+        log.debug("debug");
+        int i = 1/0;
+        return "success";
     }
 }

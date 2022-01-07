@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36}-%msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="logging" class="com.github.pukkaone.gelf.logback.GelfAppender">
+        <graylogHost>pocoda-graylog</graylogHost>
+        <originHost>tools</originHost> <!--source,source-->
+        <levelIncluded>true</levelIncluded>
+        <locationIncluded>false</locationIncluded>
+        <loggerIncluded>true</loggerIncluded>
+        <markerIncluded>false</markerIncluded>
+        <mdcIncluded>false</mdcIncluded>
+        <threadIncluded>false</threadIncluded>
+        <facility>gelf-java</facility> <!--facility, just write it-->
+        <additionalField>application=tools</additionalField> <!--application, application-->
+        <additionalField>environment=dev</additionalField> <!--environment, environment-->
+        <additionalField>managername=HealerJean</additionalField> <!--I added the managername myself, environment-->
+
+    </appender>
+
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="logging"/>
+    </root>
+</configuration>
